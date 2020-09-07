@@ -1,23 +1,12 @@
-@extends('layouts.app')
+@extends('templates.admin')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+@section('section')
+<div id="app" class="ml-5">
+    {{-- <div class="row justify-content-center">
+        <a class="dropdown-item" href="/logout">{{ __('Logout') }}</a>
+    </div> --}}
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    <example-component></example-component>
 
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 @endsection

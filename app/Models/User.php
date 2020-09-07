@@ -1,39 +1,39 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
+    use HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    public function personal_information()
+    {
+        return $this->hasOne(Personal_information::class);
+    }
+
+    public function Parking()
+    {
+        return $this->hasMany(Parking::class);
+    }
+
+
     protected $fillable = [
-        'name', 'email', 'password',
+        'email', 'password', 'status',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 }

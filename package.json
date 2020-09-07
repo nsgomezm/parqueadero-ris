@@ -15,6 +15,7 @@
         "browser-sync": "^2.26.12",
         "browser-sync-webpack-plugin": "^2.0.1",
         "cross-env": "^5.1",
+        "ed-grid": "^3.0.0",
         "jquery": "^3.2",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.13",
@@ -24,5 +25,8 @@
         "sass-loader": "^7.*",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
+    },
+    "dependencies": {
+        "sweetalert": "^2.1.2"
     }
 }

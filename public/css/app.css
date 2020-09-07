@@ -8304,7 +8304,7 @@ button.bg-dark:focus {
 }
 
 .shadow {
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 5px 5px 8px rgba(124, 124, 124, 0.8) !important;
 }
 
 .shadow-lg {
@@ -10902,5 +10902,24 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul,
+li {
+  list-style-type: none;
 }
 
