@@ -14,6 +14,7 @@ return [
     */
 
     'failed' => 'Cédula o contraseña incorrecta. Intentelo nuevamente',
+    'permisions' => 'Usuario inactivo. No puedes acceder. Comunicate con el Super Administrador.',
     'throttle' => 'Demasiados intentos de inicio de sesión. Vuelva a intentarlo en: segundos segundos.',
 
 ];

@@ -1,63 +1,127 @@
-<nav class="nav-content bg-secondary ">
-    <div class="accordion" id="nav-content">
-        <div class="card border-0">
-            <div class="card-header p-0 border-0"  id="user-content">
-                <a  data-toggle="collapse" data-target="#user" aria-expanded="true" aria-controls="user" class="text-white">
-                    <i class="fas fa-users navbar-brand" datta-target="user" data-toggle="collapse"></i> Usuarios
-                </a>
-            </div>
-            <div class="collapse" id="user" data-parent="#nav-content">
-                <div class="card-body p-0">
-                    <li> <a href="#"><i class="fas fa-bars navbar-brand"></i> Nuevo</a> </li>
-                    <li> <a href="#"><i class="fas fa-bars navbar-brand"></i> Listar</a> </li>
-                    <li> <a href="#"><i class="fas fa-bars navbar-brand"></i> Actualizar</a> </li>
-                </div>
+<div class="wrapper active">
+    <div class="top_navbar">
+        <div class="hamburger">
+            <div class="hamburger__inner">
+            <div class="one"></div>
+            <div class="two"></div>
+            <div class="three"></div>
             </div>
         </div>
-        <div class="card border-0">
-            <div class="card-header p-0 border-0"  id="park-content">
-                <a  data-toggle="collapse" data-target="#park" aria-expanded="true" aria-controls="park" class="text-white">
-                    <i class="fas fa-parking navbar-brand" datta-target="park" data-toggle="collapse"></i> Parqueaderos
-                </a>
+        <div class="menu">
+            <div class="logo">
+                {{ config('app.name', 'Laravel') }}
             </div>
-            <div class="collapse" id="park" data-parent="#nav-content">
-                <div class="card-body p-0">
-                    <li> <a href="#"><i class="fas fa-bars navbar-brand"></i> Nuevo</a> </li>
-                    <li> <a href="#"><i class="fas fa-bars navbar-brand"></i> Listar</a> </li>
-                    <li> <a href="#"><i class="fas fa-bars navbar-brand"></i> Actualizar </a> </li>
-                </div>
-            </div>
-        </div>
-        <div class="card border-0">
-            <div class="card-header p-0 border-0"  id="report-content">
-                <a  data-toggle="collapse" data-target="#report" aria-expanded="true" aria-controls="report" class="text-white">
-                    <i class="fas fa-print navbar-brand" datta-target="report" data-toggle="collapse"></i> Reportes
-                </a>
-            </div>
-            <div class="collapse" id="report" data-parent="#nav-content">
-                <div class="card-body p-0">
-                    <li> <a href="#"><i class="fas fa-bars navbar-brand"></i> Nuevo</a> </li>
-                    <li> <a href="#"><i class="fas fa-bars navbar-brand"></i> Listar</a> </li>
-                    <li> <a href="#"><i class="fas fa-bars navbar-brand"></i> Actualizar </a> </li>
-                </div>
+            <div class="right_menu">
+                <ul class="mb-0">
+                    <li><i class="fas fa-user"></i>
+                    <div class="profile_dd">
+                        <div class="profile container text-center">
+                            <div class="img img-circle">
+                                <img src="http://lorempixel.com/g/200/200/" alt="Foto" class="rounded-circle">
+                            </div>
+                            <div>
+                            <p>Bienvenid@</p>
+                            <h5 style="color: white;" >{{ Auth::user()->nickname }}</h5>
+                            </div>
+                        </div>
+                        <div class="dd_item link-yellow"><a href="/users/edit-information">Perfil </a> </div>
+                        <div class="dd_item link-yellow"><a href="#"  data-toggle="modal" data-target="#canchePassword">Cambiar contraseña  </a> </div>
+                        <div class="dd_item link-yellow"><a href="/logout">Cerrar sisión </a> </div>
+                    </div>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="card border-0">
-            <div class="card-header p-0 border-0"  id="contact-content">
-                <a  data-toggle="collapse" data-target="#contact" aria-expanded="true" aria-controls="contact" class="text-white">
-                    <i class="fas fa-id-card navbar-brand" datta-target="contact" data-toggle="collapse"></i> Contacto
-                </a>
+    </div>
+
+    <div class="main_container">
+        <div class="sidebar">
+            <div class="sidebar__inner menujq">
+                <ul>
+                    <li>
+                    <a href="/home" class="icon">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="title">Inicio</span>
+                    </a>
+                    </li>
+
+                    <li>
+                    <a href="/users/list" class="icon">
+                        <span class="icon"><i class="fas fa-users"></i></span>
+                        <span class="title">Usuarios</span>
+                    </a>
+                    </li>
+
+                    <li>
+                    <a href="javascript:void();" class="icon">
+                        <span class="icon"><i class="fab fa-delicious"></i></span>
+                        <span class="title">Opciones 1</span>
+                    </a>
+                    <ul>
+                        <li>
+                        <a href="#" class="icon">
+                            <span class="icon"><i class="fab fa-delicious"></i></span>
+                            <span class="title">Opcion 1</span>
+                        </a>
+                        </li>
+                        <li>
+                        <a href="#" class="icon">
+                            <span class="icon"><i class="fab fa-delicious"></i></span>
+                            <span class="title">Opcion 2</span>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="javascript:void();" class="icon">
+                        <span class="icon"><i class="fab fa-delicious"></i></span>
+                        <span class="title">Opciones 2</span>
+                    </a>
+                    <ul>
+                        <li>
+                        <a href="#" class="icon">
+                            <span class="icon"><i class="fab fa-delicious"></i></span>
+                            <span class="title">Opcion 1</span>
+                        </a>
+                        </li>
+                        <li>
+                        <a href="#" class="icon">
+                            <span class="icon"><i class="fab fa-delicious"></i></span>
+                            <span class="title">Opcion 2</span>
+                        </a>
+                        </li>
+                        <li>
+                        <a href="#" class="icon">
+                            <span class="icon"><i class="fab fa-delicious"></i></span>
+                            <span class="title">Opcion 3</span>
+                        </a>
+                        </li>
+                    </ul>
+                    </li>
+                </ul>
             </div>
-            <div class="collapse" id="contact" data-parent="#nav-content">
-                <div class="card-body p-0">
-                    <li> <a href="#"><i class="fas fa-bars navbar-brand"></i> Nuevo</a> </li>
-                    <li> <a href="#"><i class="fas fa-bars navbar-brand"></i> Listar</a> </li>
-                    <li> <a href="#"><i class="fas fa-bars navbar-brand"></i> Actualizar </a> </li>
+        </div>
+        <div class="containerr" id="app">
+            @yield('content')
+            <div class="modal fade" id="canchePassword" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="z-index: 20000">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Actualizar contraseña</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <users-form-password></users-form-password>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="copy-right text-center">
-        <p>© <span >2020</span></p>
-    </div>
-</nav>
+</div>
+

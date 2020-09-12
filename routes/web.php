@@ -20,23 +20,23 @@ use Illuminate\Support\Facades\Auth;
 Route::prefix('/test')->group(function () {
     Route::get('/user', function () {
         $user = New User();
-        $user->nickname = "nsgomez02";
-        $user->email = "nicolsteevengomesmarin@gmail.com";
+        $user->nickname = "ldperezv";
+        $user->email = "leidy@gmail.com";
         $user->password = bcrypt("123456");
-        $user->status = "activo";
+        $user->status = "inactivo";
         $user->save();
     });
 
     Route::get('/information', function(){
         $information = New Personal_information();
-        $information->cedula = "1088358516";
-        $information->name = "Nicol Steeven";
-        $information->last_name = "Gómez Marin";
+        $information->cedula = "10883165";
+        $information->name = "Leidy Dahiana";
+        $information->last_name = "Perez vanegas";
         $information->cel = "3135504351";
         $information->photo = "url foto";
-        $information->address = "cll 26 #6-54";
+        $information->address = "cll 17 av rio";
         $information->comments = "Sin comentarios";
-        $information->user_id = '1';
+        $information->user_id = '4';
         $information->save();
     });
 
@@ -59,9 +59,9 @@ Route::prefix('/test')->group(function () {
 
     Route::get('/rol', function(){
         // $user = Auth::user();
-        $user = User::find("1");
+        $user = User::find("4");
         // $user->removeRole('Admin');
-        $user->assignRole('S.Admin');
+        $user->assignRole('Admin');
         // return $user->getRoleNames();
         return $user;
     });
@@ -83,5 +83,23 @@ Route::get('/logout', 'AuthController@logout');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+
+
+    Route::prefix('/users')->group(function () {
+        Route::get('/list', 'UserController@index')->name('user.list');
+        Route::get('/edit-information/{user?}', 'UserController@form')->name('user.form');
+
+        Route::post('/edit-information/photo/{personal_information?}', 'UserController@setPhoto');
+        Route::post('/edit-information/user/{user?}', 'UserController@setUser');
+        Route::post('/edit-information/personal-information/{Personal_information}', 'UserController@setPersonalInformation');
+
+        // Route::get('/edit-information', function(){
+            // return "editar";
+        // });
+    });
+
+
+
+
 });
 

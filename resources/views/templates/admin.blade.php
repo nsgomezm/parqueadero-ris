@@ -9,7 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- js -->
-
     <script src="https://kit.fontawesome.com/d10f5f87f4.js" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
@@ -19,19 +18,15 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    @yield('css')
+
 
 </head>
 <body>
-    @include('templates._header')
-
-    {{-- @include('templates._nav') --}}
-    @yield('section')
-
-
+    @include('templates._nav')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
     @yield('js')
 </body>
 </html>

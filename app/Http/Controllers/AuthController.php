@@ -11,7 +11,14 @@ class AuthController extends Controller
         $credentials = $request->only('nickname', 'password');
 
         if (Auth::attempt($credentials)) {
-			return Redirect()->intended('home');
+
+            if(Auth::user()->status == 'activo'){
+                return Redirect()->intended('home');
+            }
+
+            Auth::logout();
+            return redirect()->intended('/')->withErrors(['credentials' => [trans('auth.permisions')]])->withInput();
+
         }
 
         return redirect()->intended('/')->withErrors(['credentials' => [trans('auth.failed')]])->withInput();

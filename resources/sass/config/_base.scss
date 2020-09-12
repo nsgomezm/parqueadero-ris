@@ -3,6 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    overflow-x: hidden;
+    @include media-breakpoint-down(sm) {
+        min-width: 270px;
+        overflow-x: auto;
+    }
+}
 a{
     cursor:pointer;
     &:hover{
@@ -16,3 +23,9 @@ ul, li{
 
 // utilities
 
+.link-yellow{
+    color: #ff0 !important;
+    &:hover{
+        color: #333 !important ;
+    }
+}

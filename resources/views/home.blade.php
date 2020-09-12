@@ -1,12 +1,11 @@
 @extends('templates.admin')
 
-@section('section')
-<div id="app" class="ml-5">
-    {{-- <div class="row justify-content-center">
-        <a class="dropdown-item" href="/logout">{{ __('Logout') }}</a>
-    </div> --}}
+@section('content')
+    <div class="container">
+        <h1>Informacion de los parquedaeros</h1>
+    </div>
+@endsection
 
-    <example-component></example-component>
-
-</div>
+@section('js')
+    <script src="{{ asset('js/nav.js') }}" defer></script>
 @endsection

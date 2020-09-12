@@ -6,30 +6,24 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+import Vue from 'vue'
+import Vuelidate from 'vuelidate'
+Vue.use(Vuelidate)
+import datatables from 'datatables.net'
 import swal from 'sweetalert'
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-import ExampleComponent from './components/ExampleComponent'
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+import ListUsers from './components/user/ListUsers'
+import FormUser from './components/user/FormUser'
+import FormPhoto from './components/user/FormPhoto'
+import FormInformation from './components/user/FormInformation'
+import FormPassword from './components/user/FormPassword'
 
 const app = new Vue({
     el: '#app',
     components:{
-        ExampleComponent,
+        'users-list': ListUsers,
+        'users-form-user': FormUser,
+        'users-form-photo': FormPhoto,
+        'users-form-information': FormInformation,
+        'users-form-password': FormPassword,
     }
 });
