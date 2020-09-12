@@ -10910,6 +10910,10 @@ a.text-dark:focus {
   box-sizing: border-box;
 }
 
+.swal-overlay {
+  z-index: 500000 !important;
+}
+
 body {
   overflow-x: hidden;
 }

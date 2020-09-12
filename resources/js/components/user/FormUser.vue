@@ -7,19 +7,19 @@
             </div>
             <div class="form-group">
                 <label for="email">Correo electronico</label>
-                <input type="email" class="form-control" id="email" v-model="data.email" required>
+                <input type="email" class="form-control" id="email" v-model="data.email">
             </div>
             <div class="form-group" v-if="newUser == true">
                 <label for="emailConfirm">Confirmar electronico</label>
-                <input type="email" class="form-control" id="emailConfirm" v-model="data.email" required>
+                <input type="email" class="form-control" id="emailConfirm" v-model="data.email">
             </div>
             <div class="form-group" v-if="newUser == true">
                 <label for="passwordactual">Contraseña</label>
-                <input type="password" class="form-control" id="passwordactual" v-model="data.password" required>
+                <input type="password" class="form-control" id="passwordactual" v-model="data.password">
             </div>
             <div class="form-group" v-if="newUser == true">
                 <label for="passwordconfirm">confirmar contraseña</label>
-                <input type="password" class="form-control" id="passwordconfirm" required>
+                <input type="password" class="form-control" id="passwordconfirm">
             </div>
             <div class="form-group" >
                 <div class="input-group mb-3">
@@ -35,11 +35,11 @@
             <div class="form-row">
                 <div class="form-group col-12 col-md-6" v-if="newUser == false">
                     <label for="created_at">Fecha creación</label>
-                    <input type="datetime" class="form-control" id="created_at" v-model="data.created_at" disabled required>
+                    <input type="datetime" class="form-control" id="created_at" v-model="data.created_at" disabled>
                 </div>
                 <div class="form-group col-12 col-md-6" v-if="newUser == false">
                     <label for="updated_at">Ultima actualización</label>
-                    <input type="datetime" class="form-control" id="updated_at" v-model="data.updated_at" disabled required>
+                    <input type="datetime" class="form-control" id="updated_at" v-model="data.updated_at" disabled>
                 </div>
             </div>
             <div class="input-group d-flex justify-content-around align-items-center m-auto my-4" style="max-width: 500px">
@@ -79,9 +79,8 @@
                 if(this.newUser == false){ url += this.data.id }
 
                 console.log(this.data)
-
+                // No funciona para crear un usuario
                 await axios.post(url, this.data).then(res => {
-                    console.log(res.data.menssage)
                     swal(res.data.title, res.data.menssage, "success");
                 })
             }

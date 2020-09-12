@@ -34,7 +34,7 @@
                             <users-form-information :user="{{ $user->personal_information }}"></users-form-information >
                         </div>
                         <div class="tab-pane fade m-auto" id="password" role="tabpanel" aria-labelledby="password-tab" style="max-width: 800px">
-                            <users-form-password :user="{{ $user->personal_information }}"></users-form-password>
+                            <users-form-password :user="{{ $user }}"></users-form-password>
                         </div>
                     </div>
                 </div>

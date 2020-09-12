@@ -3,6 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+.swal-overlay{
+    z-index: 500000 !important;
+}
 body{
     overflow-x: hidden;
     @include media-breakpoint-down(sm) {

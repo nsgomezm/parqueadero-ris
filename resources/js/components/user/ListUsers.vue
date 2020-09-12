@@ -49,7 +49,7 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <form-user></form-user>
+                            <form-user :user="false"></form-user>
                         </form>
                     </div>
                 </div>

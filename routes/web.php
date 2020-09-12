@@ -92,6 +92,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/edit-information/photo/{personal_information?}', 'UserController@setPhoto');
         Route::post('/edit-information/user/{user?}', 'UserController@setUser');
         Route::post('/edit-information/personal-information/{Personal_information}', 'UserController@setPersonalInformation');
+        Route::post('/edit-information/change-password/{user}', 'UserController@setPassword');
 
         // Route::get('/edit-information', function(){
             // return "editar";

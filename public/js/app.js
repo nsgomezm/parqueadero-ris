@@ -2052,16 +2052,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['user'],
+  data: function data() {
+    return {
+      password: {
+        old: '',
+        "new": '',
+        confirm: ''
+      }
+    };
+  },
   methods: {
     store: function store() {
+      var _this = this;
+
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                alert('save');
+                _context.next = 2;
+                return axios.post("/users/edit-information/change-password/".concat(_this.user.id), _this.password).then(function (res) {
+                  swal(res.data.title, res.data.menssage, res.data.alert).then(function (value) {
+                    if (res.data.update) {
+                      swal("Debes volver a inciar sesión.", "", "warning").then(function (value) {
+                        window.location.href = "/logout";
+                      });
+                    } else {
+                      _this.password.old = '';
+                      _this.password["new"] = '';
+                      _this.password.confirm = '';
+                    }
+                  });
+                });
 
-              case 1:
+              case 2:
               case "end":
                 return _context.stop();
             }
@@ -2164,7 +2189,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       while (1) {
                         switch (_context2.prev = _context2.next) {
                           case 0:
-                            console.log(res.data);
+                            swal('Foto actualizada con exito', 'para poder visualizar los cambios recargue la pagina.', 'success');
 
                           case 1:
                           case "end":
@@ -2313,10 +2338,10 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
                   url += _this2.data.id;
                 }
 
-                console.log(_this2.data);
+                console.log(_this2.data); // No funciona para crear un usuario
+
                 _context2.next = 5;
                 return axios.post(url, _this2.data).then(function (res) {
-                  console.log(res.data.menssage);
                   swal(res.data.title, res.data.menssage, "success");
                 });
 
@@ -75693,63 +75718,96 @@ var render = function() {
         }
       },
       [
-        _vm._m(0),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "password-old" } }, [
+            _vm._v("Contraseña actual")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.password.old,
+                expression: "password.old"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "password", id: "password-old", required: "" },
+            domProps: { value: _vm.password.old },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.password, "old", $event.target.value)
+              }
+            }
+          })
+        ]),
         _vm._v(" "),
-        _vm._m(1),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "password-new" } }, [
+            _vm._v("Nueva contraseña")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.password.new,
+                expression: "password.new"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "password", id: "password-new", required: "" },
+            domProps: { value: _vm.password.new },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.password, "new", $event.target.value)
+              }
+            }
+          })
+        ]),
         _vm._v(" "),
-        _vm._m(2),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "password-confirm" } }, [
+            _vm._v("Confirmar contraseña")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.password.confirm,
+                expression: "password.confirm"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "password", id: "password-confirm", required: "" },
+            domProps: { value: _vm.password.confirm },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.password, "confirm", $event.target.value)
+              }
+            }
+          })
+        ]),
         _vm._v(" "),
-        _vm._m(3)
+        _vm._m(0)
       ]
     )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "password-old" } }, [
-        _vm._v("Contraseña actual")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "password", id: "password-old", required: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "password-new" } }, [
-        _vm._v("Nueva contraseña")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "password", id: "password-new", required: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "password-confirm" } }, [
-        _vm._v("Confirmar contraseña")
-      ]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "password", id: "password-confirm", required: "" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -75926,7 +75984,7 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "email", id: "email", required: "" },
+            attrs: { type: "email", id: "email" },
             domProps: { value: _vm.data.email },
             on: {
               input: function($event) {
@@ -75955,7 +76013,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "email", id: "emailConfirm", required: "" },
+                attrs: { type: "email", id: "emailConfirm" },
                 domProps: { value: _vm.data.email },
                 on: {
                   input: function($event) {
@@ -75985,7 +76043,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "password", id: "passwordactual", required: "" },
+                attrs: { type: "password", id: "passwordactual" },
                 domProps: { value: _vm.data.password },
                 on: {
                   input: function($event) {
@@ -76007,7 +76065,7 @@ var render = function() {
               _vm._v(" "),
               _c("input", {
                 staticClass: "form-control",
-                attrs: { type: "password", id: "passwordconfirm", required: "" }
+                attrs: { type: "password", id: "passwordconfirm" }
               })
             ])
           : _vm._e(),
@@ -76077,12 +76135,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: {
-                    type: "datetime",
-                    id: "created_at",
-                    disabled: "",
-                    required: ""
-                  },
+                  attrs: { type: "datetime", id: "created_at", disabled: "" },
                   domProps: { value: _vm.data.created_at },
                   on: {
                     input: function($event) {
@@ -76112,12 +76165,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: {
-                    type: "datetime",
-                    id: "updated_at",
-                    disabled: "",
-                    required: ""
-                  },
+                  attrs: { type: "datetime", id: "updated_at", disabled: "" },
                   domProps: { value: _vm.data.updated_at },
                   on: {
                     input: function($event) {
@@ -76285,7 +76333,7 @@ var render = function() {
             _vm._m(2),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
-              _c("form", [_c("form-user")], 1)
+              _c("form", [_c("form-user", { attrs: { user: false } })], 1)
             ])
           ])
         ])

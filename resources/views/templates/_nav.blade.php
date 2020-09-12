@@ -24,9 +24,9 @@
                             <h5 style="color: white;" >{{ Auth::user()->nickname }}</h5>
                             </div>
                         </div>
-                        <div class="dd_item link-yellow"><a href="#">Perfil </a> </div>
-                        <div class="dd_item link-yellow"><a href="#"  data-toggle="modal" data-target="#canchePassword">Cambiar contraseña  </a> </div>
-                        <div class="dd_item link-yellow"><a href="/logout">Cerrar sisión </a> </div>
+                        <div class="dd_item link-yellow"><a class="d-block" href="/users/edit-information/">Perfil </a> </div>
+                        <div class="dd_item link-yellow"><a class="d-block" href="#"  data-toggle="modal" data-target="#canchePassword">Cambiar contraseña  </a> </div>
+                        <div class="dd_item link-yellow"><a class="d-block" href="/logout">Cerrar sisión </a> </div>
                     </div>
                     </li>
                 </ul>
@@ -115,7 +115,7 @@
                         </div>
                         <div class="modal-body">
                             <form>
-                                <users-form-password></users-form-password>
+                                <users-form-password :user="{{ Auth::user() }}"></users-form-password>
                             </form>
                         </div>
                     </div>

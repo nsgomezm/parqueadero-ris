@@ -46,7 +46,7 @@ export default {
             form_data.append('avatar', this.file, this.file.name)
 
             await axios.post(`/users/edit-information/photo/${this.user.id}`, form_data).then(async (res) => {
-                console.log(res.data)
+                swal('Foto actualizada con exito', 'para poder visualizar los cambios recargue la pagina.', 'success')
             })
         }
     }

@@ -7,6 +7,7 @@ use App\Models\User;
 use Faker\Provider\ar_JO\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -44,10 +45,12 @@ class UserController extends Controller
 
     }
 
-    function setUser(User $user = null, Request $request){
+    function setUser(User $user = null, Request $Request){
+        $data = request()->all();
+
 
         if($user != null){
-            $user->update($request->all());
+            $user->update($data);
 
             return response()->json([
                 'title' => 'Se actualizó',
@@ -55,13 +58,12 @@ class UserController extends Controller
             ]);
         }
 
-        // dd($request);
-
-        $inser =  new User($request->all());
-        $inser->save();
-
+        $user = new User($data);
+        $user->save();
         return response()->json([
-            'result' => $request->email
+            'title' => 'Nuevo Usuario',
+            'menssage' => 'Se creo un nuevo usuario',
+            'result' => $data
             // $insert
         ]);
     }
@@ -74,6 +76,27 @@ class UserController extends Controller
         ]);
     }
 
+    function setPassword(User $user, Request $request){
 
+        if (Hash::check($request->old, $user->password)){
+
+            $user->password = Hash::make($request->new);
+            $user->save();
+
+            return response()->json([
+                'update' => true,
+                'title' => 'Contraseñas actualizadas',
+                'menssage' => 'La contraseña fue actualizada con exito.',
+                'alert' => 'success',
+            ]);
+        }
+
+        return response()->json([
+            'update' => false,
+            'title' =>  'Credenciales incorrectas',
+            'menssage' => 'Las contraseña actual es incorrecta',
+            'alert' => 'warning',
+        ]);
+    }
 
 }
