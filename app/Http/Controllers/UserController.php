@@ -30,11 +30,11 @@ class UserController extends Controller
             'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imageName = $personal_information->cedula.'.'. request()->avatar->getClientOriginalExtension();
+        $imageName = '/images/persons/admins/' . $personal_information->cedula.'.'. request()->avatar->getClientOriginalExtension();
 
         request()->avatar->move(public_path('/images/persons/admins'), $imageName);
-        $this->user->avatar = $imageName;
-        $this->user->update();
+        $personal_information->photo = $imageName;
+        $personal_information->update();
 
         return response()->json([
             true

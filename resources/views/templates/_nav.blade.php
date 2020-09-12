@@ -16,15 +16,15 @@
                     <li><i class="fas fa-user"></i>
                     <div class="profile_dd">
                         <div class="profile container text-center">
-                            <div class="img img-circle">
-                                <img src="http://lorempixel.com/g/200/200/" alt="Foto" class="rounded-circle">
+                            <div class="img img-circle ">
+                                <img src="{{ Auth::user()->load('personal_information')->personal_information->photo }}" alt="Foto" class="rounded-circle" style="height: 80px; width: 80px">
                             </div>
                             <div>
                             <p>Bienvenid@</p>
                             <h5 style="color: white;" >{{ Auth::user()->nickname }}</h5>
                             </div>
                         </div>
-                        <div class="dd_item link-yellow"><a href="/users/edit-information">Perfil </a> </div>
+                        <div class="dd_item link-yellow"><a href="#">Perfil </a> </div>
                         <div class="dd_item link-yellow"><a href="#"  data-toggle="modal" data-target="#canchePassword">Cambiar contraseña  </a> </div>
                         <div class="dd_item link-yellow"><a href="/logout">Cerrar sisión </a> </div>
                     </div>
