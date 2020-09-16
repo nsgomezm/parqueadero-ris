@@ -59,16 +59,16 @@ Route::prefix('/test')->group(function () {
 
     Route::get('/rol', function(){
         // $user = Auth::user();
-        $user = User::find("4");
+        $user = User::find("1");
         // $user->removeRole('Admin');
-        $user->assignRole('Admin');
+        $user->assignRole('S.Admin');
         // return $user->getRoleNames();
         return $user;
     });
 
     Route::get('/', function(){
-        return Parking::with('user.personal_information')->get();
-        return User::with('Personal_information', 'parking')->get();
+        // return Parking::with('user.personal_information')->get();
+        return User::with('Personal_information', 'roles', 'parking')->get();
 
 
         // return Personal_information::with('user')->get();
@@ -93,6 +93,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/edit-information/user/{user?}', 'UserController@setUser');
         Route::post('/edit-information/personal-information/{Personal_information}', 'UserController@setPersonalInformation');
         Route::post('/edit-information/change-password/{user}', 'UserController@setPassword');
+        Route::post('/edit-information/delete/{user}', 'UserController@deleteUser');
 
         // Route::get('/edit-information', function(){
             // return "editar";

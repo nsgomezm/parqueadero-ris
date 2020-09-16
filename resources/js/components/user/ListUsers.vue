@@ -92,19 +92,23 @@
                 // swal('Confirmar eliminación', '¿seguro que deseas eliminar a ' + user.personal_information.name +'?', 'warning')
                 swal({
                     title: "Confirmar eliminación",
-                    text: "¿Si eliminas a "+user.personal_information.name+ " no podras recuperar su información?",
+                    text: "Si eliminas a "+user.personal_information.name+ " no podras recuperar su información",
                     icon: "warning",
                     buttons: true,
                     dangerMode: true,
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        swal(user.personal_information.name + " fue eliminadó con exito", {
-                        icon: "success",
-                        });
+                        this.delete(user)
                     }
                 })
-                console.log(user)
+            },
+
+            async delete(user){
+                await axios.post(`/users/edit-information/delete/${user.id}`).then(res => {
+                    this.users = res.data.users
+                    swal('',user.personal_information.name + " se eliminó con exito", 'success')
+                })
             }
         }
 

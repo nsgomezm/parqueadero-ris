@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form  v-on:submit.prevent="store">
+        <form  v-on:submit.prevent="store" autocomplete="off">
             <div class="form-group">
                 <label for="nickname">Usuario</label>
                 <input type="text" class="form-control" id="nickname" v-model="data.nickname" required>
@@ -20,6 +20,18 @@
             <div class="form-group" v-if="newUser == true">
                 <label for="passwordconfirm">confirmar contraseña</label>
                 <input type="password" class="form-control" id="passwordconfirm">
+            </div>
+            <div class="form-group" v-if="newUser == false">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="status">Rol</label>
+                    </div>
+                    <select class="custom-select" id="status" v-model="data.roles[0].name">
+                        <option value="S.Admin">Super Administrador</option>
+                        <option value="Admin">Adminsitrador</option>
+                        <option value="patio">Patio</option>
+                    </select>
+                </div>
             </div>
             <div class="form-group" >
                 <div class="input-group mb-3">
@@ -51,19 +63,17 @@
 </template>
 
 <script>
-  // Import Swiper Vue.js components
     var moment = require('moment')
-    // console.log(moment().format());
 
     export default {
         props:['user'],
         data() {
             return {
                 newUser: true,
-                data: [],
+                data: [ ],
             }
         },
-        mounted(){
+        created(){
             this.getUser()
         },
         methods:{
@@ -78,7 +88,6 @@
                 var url = '/users/edit-information/user/'
                 if(this.newUser == false){ url += this.data.id }
 
-                console.log(this.data)
                 // No funciona para crear un usuario
                 await axios.post(url, this.data).then(res => {
                     swal(res.data.title, res.data.menssage, "success");

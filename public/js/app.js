@@ -2286,9 +2286,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-// Import Swiper Vue.js components
-var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"); // console.log(moment().format());
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['user'],
@@ -2298,7 +2308,7 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
       data: []
     };
   },
-  mounted: function mounted() {
+  created: function created() {
     this.getUser();
   },
   methods: {
@@ -2336,16 +2346,15 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
                 if (_this2.newUser == false) {
                   url += _this2.data.id;
-                }
+                } // No funciona para crear un usuario
 
-                console.log(_this2.data); // No funciona para crear un usuario
 
-                _context2.next = 5;
+                _context2.next = 4;
                 return axios.post(url, _this2.data).then(function (res) {
                   swal(res.data.title, res.data.menssage, "success");
                 });
 
-              case 5:
+              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -2461,6 +2470,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     deleteUser: function deleteUser(user) {
+      var _this = this;
+
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
@@ -2469,25 +2480,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 // swal('Confirmar eliminación', '¿seguro que deseas eliminar a ' + user.personal_information.name +'?', 'warning')
                 swal({
                   title: "Confirmar eliminación",
-                  text: "¿Si eliminas a " + user.personal_information.name + " no podras recuperar su información?",
+                  text: "Si eliminas a " + user.personal_information.name + " no podras recuperar su información",
                   icon: "warning",
                   buttons: true,
                   dangerMode: true
                 }).then(function (willDelete) {
                   if (willDelete) {
-                    swal(user.personal_information.name + " fue eliminadó con exito", {
-                      icon: "success"
-                    });
+                    _this["delete"](user);
                   }
                 });
-                console.log(user);
 
-              case 2:
+              case 1:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
+      }))();
+    },
+    "delete": function _delete(user) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.post("/users/edit-information/delete/".concat(user.id)).then(function (res) {
+                  _this2.users = res.data.users;
+                  swal('', user.personal_information.name + " se eliminó con exito", 'success');
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
       }))();
     }
   }
@@ -75935,6 +75965,7 @@ var render = function() {
     _c(
       "form",
       {
+        attrs: { autocomplete: "off" },
         on: {
           submit: function($event) {
             $event.preventDefault()
@@ -76070,9 +76101,65 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
+        _vm.newUser == false
+          ? _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "input-group mb-3" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.data.roles[0].name,
+                        expression: "data.roles[0].name"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    attrs: { id: "status" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.data.roles[0],
+                          "name",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "S.Admin" } }, [
+                      _vm._v("Super Administrador")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "Admin" } }, [
+                      _vm._v("Adminsitrador")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "patio" } }, [
+                      _vm._v("Patio")
+                    ])
+                  ]
+                )
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
           _c("div", { staticClass: "input-group mb-3" }, [
-            _vm._m(0),
+            _vm._m(1),
             _vm._v(" "),
             _c(
               "select",
@@ -76180,12 +76267,24 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
-        _vm._m(1)
+        _vm._m(2)
       ]
     )
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "label",
+        { staticClass: "input-group-text", attrs: { for: "status" } },
+        [_vm._v("Rol")]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

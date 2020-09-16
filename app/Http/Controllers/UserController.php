@@ -18,9 +18,9 @@ class UserController extends Controller
 
     function form(User $User = null){
         if($User == null){
-            $user = Auth::user()->load('personal_information');
+            $user = Auth::user()->load('personal_information', 'roles');
         }else{
-            $user = $User;
+            $user = $User->load('roles');
         }
 
         return view('user/form', compact('user'));
@@ -39,8 +39,6 @@ class UserController extends Controller
 
         return response()->json([
             true
-            // $personal_information,
-            // $request
         ]);
 
     }
@@ -48,10 +46,13 @@ class UserController extends Controller
     function setUser(User $user = null, Request $Request){
         $data = request()->all();
 
+        // return response()->json([
+            // $Request->roles[0]
+        // ]);
 
         if($user != null){
             $user->update($data);
-
+            $user->syncRoles($Request->roles[0]['name']);
             return response()->json([
                 'title' => 'Se actualizó',
                 'menssage' => 'La información personal se actualizó correctamente'
@@ -99,4 +100,11 @@ class UserController extends Controller
         ]);
     }
 
+    function deleteUser(User $user){
+        $user->delete();
+
+        return response()->json([
+            'users' => User::with('personal_information', 'roles')->get()
+        ]);
+    }
 }
