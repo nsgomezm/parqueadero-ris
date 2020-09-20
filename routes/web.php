@@ -94,10 +94,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/edit-information/personal-information/{Personal_information}', 'UserController@setPersonalInformation');
         Route::post('/edit-information/change-password/{user}', 'UserController@setPassword');
         Route::post('/edit-information/delete/{user}', 'UserController@deleteUser');
+    });
 
-        // Route::get('/edit-information', function(){
-            // return "editar";
-        // });
+    Route::prefix('/Parking')->group(function(){
+        Route::get('/list', 'ParkingController@index')->name('parking.list');
+        Route::get('/edit-information/{parking}', 'ParkingController@form')->name('parking.form');
+
+        Route::post('/edit-information/set/{parking?}', 'ParkingController@setParking');
+        Route::post('/edit-information/delete/{parking}', 'ParkingController@deleteParking');
+
+
     });
 
 

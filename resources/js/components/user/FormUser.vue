@@ -1,6 +1,10 @@
 <template>
     <div>
         <form  v-on:submit.prevent="store" autocomplete="off">
+            <div class="form-group" v-if="newUser == true">
+                <label for="cedula">Cedula</label>
+                <input type="number" class="form-control" id="cedula" v-model="data.personal_information.cedula" required>
+            </div>
             <div class="form-group">
                 <label for="nickname">Usuario</label>
                 <input type="text" class="form-control" id="nickname" v-model="data.nickname" required>
@@ -70,7 +74,21 @@
         data() {
             return {
                 newUser: true,
-                data: [ ],
+                data: {
+                    nickname: '',
+                    email:'',
+                    password:'',
+                    status: '',
+                    personal_information:{
+                        cedula: '',
+                        name: '',
+                        last_name: '',
+                        cel: '',
+                        photo: '/images/persons/admins/noimage.png',
+                        address: '',
+                        comments: 'Sin comentarios',
+                    }
+                },
             }
         },
         created(){

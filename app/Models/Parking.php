@@ -15,6 +15,6 @@ class Parking extends Model
     }
 
     protected $fillable = [
-        'name', 'cel', 'address', 'user_id',
+        'nit','name', 'cel', 'address', 'user_id',
     ];
 }

@@ -51,6 +51,12 @@
                         <span class="title">Usuarios</span>
                     </a>
                     </li>
+                    <li>
+                    <a href="/Parking/list" class="icon">
+                        <span class="icon"><i class="fas fa-parking"></i></span>
+                        <span class="title">PARQUEADERO</span>
+                    </a>
+                    </li>
 
                     <li>
                     <a href="javascript:void();" class="icon">

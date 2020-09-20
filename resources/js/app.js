@@ -17,6 +17,9 @@ import FormPhoto from './components/user/FormPhoto'
 import FormInformation from './components/user/FormInformation'
 import FormPassword from './components/user/FormPassword'
 
+import ListParking from './components/parking/ListParking'
+import FormParking from './components/parking/Form'
+
 const app = new Vue({
     el: '#app',
     components:{
@@ -25,5 +28,8 @@ const app = new Vue({
         'users-form-photo': FormPhoto,
         'users-form-information': FormInformation,
         'users-form-password': FormPassword,
+
+        'parking-list': ListParking,
+        'parking-form': FormParking,
     }
 });

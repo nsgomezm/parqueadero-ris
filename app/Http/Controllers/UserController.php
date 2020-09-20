@@ -7,6 +7,7 @@ use App\Models\User;
 use Faker\Provider\ar_JO\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -46,10 +47,6 @@ class UserController extends Controller
     function setUser(User $user = null, Request $Request){
         $data = request()->all();
 
-        // return response()->json([
-            // $Request->roles[0]
-        // ]);
-
         if($user != null){
             $user->update($data);
             $user->syncRoles($Request->roles[0]['name']);
@@ -59,14 +56,24 @@ class UserController extends Controller
             ]);
         }
 
-        $user = new User($data);
-        $user->save();
-        return response()->json([
-            'title' => 'Nuevo Usuario',
-            'menssage' => 'Se creo un nuevo usuario',
-            'result' => $data
-            // $insert
-        ]);
+        try{
+            DB::beginTransaction();
+            $user = new User($Request->except($Request->cedula));
+            $user->save();
+            $user
+                ->personal_information()
+                ->save(new Personal_information($Request->personal_information));
+            DB::commit();
+            return response()->json([
+                'title' => 'Nuevo Usuario',
+                'menssage' => 'Se creo un nuevo usuario',
+                'result' => $data
+                // $insert
+            ]);
+        } catch (\Exception $error){
+            DB::rollback();
+            return $error;
+        }
     }
 
     function setPersonalInformation(Personal_information $Personal_information, Request $request){
