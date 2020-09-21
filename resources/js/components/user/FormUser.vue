@@ -108,7 +108,14 @@
 
                 // No funciona para crear un usuario
                 await axios.post(url, this.data).then(res => {
-                    swal(res.data.title, res.data.menssage, "success");
+                    if(res.data.error != false){
+                        swal(res.data.title, res.data.menssage, "error")
+                    }else{
+                        swal(res.data.title, res.data.menssage, "success")
+                        .then(xx => {
+                            window.location.href = `/users/edit-information/${res.data.user.id}`
+                        })
+                    }
                 })
             }
         },

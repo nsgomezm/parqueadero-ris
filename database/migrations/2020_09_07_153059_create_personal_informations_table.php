@@ -16,12 +16,12 @@ class CreatePersonalInformationsTable extends Migration
         Schema::create('personal_informations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('cedula');
-            $table->string('name');
-            $table->string('last_name');
-            $table->bigInteger('cel');
-            $table->string('photo');
-            $table->string('address');
-            $table->string('comments');
+            $table->string('name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->bigInteger('cel')->nullable();
+            $table->string('photo')->default('/images/persons/admins/noimage.png');
+            $table->string('address')->nullable();
+            $table->string('comments')->default('Sin comentarios');
             $table->unsignedBigInteger('user_id');
             $table->softDeletes();
             $table->timestamps();

@@ -2868,7 +2868,13 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
                 _context2.next = 4;
                 return axios.post(url, _this2.data).then(function (res) {
-                  swal(res.data.title, res.data.menssage, "success");
+                  if (res.data.error != false) {
+                    swal(res.data.title, res.data.menssage, "error");
+                  } else {
+                    swal(res.data.title, res.data.menssage, "success").then(function (xx) {
+                      window.location.href = "/users/edit-information/".concat(res.data.user.id);
+                    });
+                  }
                 });
 
               case 4:

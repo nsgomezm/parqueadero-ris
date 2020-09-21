@@ -10,7 +10,7 @@ class Personal_information extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 'last_name', 'cel','photo', 'address','comments',
+        'cedula','name', 'last_name', 'cel','photo', 'address','comments',
     ];
 
 

@@ -20,23 +20,21 @@ use Illuminate\Support\Facades\Auth;
 Route::prefix('/test')->group(function () {
     Route::get('/user', function () {
         $user = New User();
-        $user->nickname = "ldperezv";
-        $user->email = "leidy@gmail.com";
+        $user->nickname = "nsgomez02";
+        $user->email = "nsgomez02@misena.edu.com";
         $user->password = bcrypt("123456");
-        $user->status = "inactivo";
+        $user->status = "activo";
         $user->save();
     });
 
     Route::get('/information', function(){
         $information = New Personal_information();
-        $information->cedula = "10883165";
-        $information->name = "Leidy Dahiana";
-        $information->last_name = "Perez vanegas";
+        $information->cedula = "1088358516";
+        $information->name = "Nicol Steeven";
+        $information->last_name = "Gómez Marín";
         $information->cel = "3135504351";
-        $information->photo = "url foto";
         $information->address = "cll 17 av rio";
-        $information->comments = "Sin comentarios";
-        $information->user_id = '4';
+        $information->user_id = '1';
         $information->save();
     });
 

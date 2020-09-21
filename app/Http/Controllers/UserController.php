@@ -63,16 +63,25 @@ class UserController extends Controller
             $user
                 ->personal_information()
                 ->save(new Personal_information($Request->personal_information));
+
+            $user->assignRole('patio');
+            $user->load('roles');
             DB::commit();
             return response()->json([
-                'title' => 'Nuevo Usuario',
-                'menssage' => 'Se creo un nuevo usuario',
-                'result' => $data
-                // $insert
+                'title' => 'Se guardo exitosamente',
+                'menssage' => '',
+                'user' => $user,
+                'error' => false
             ]);
+
         } catch (\Exception $error){
             DB::rollback();
-            return $error;
+            return response()->json([
+                'title' => 'Error',
+                'menssage' => 'No se guardo, error',
+                'cedula' => $Request->personal_information,
+                'error' => $error
+            ]);
         }
     }
 
