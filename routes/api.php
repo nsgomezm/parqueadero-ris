@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Personal_information;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -21,3 +22,14 @@ Route::get('/admins/get', function(){
     ]);
 });
 
+Route::get('/validate/cedula/{number}', function($number){
+    return Personal_information::with('user')->where('cedula', '=', $number)->get();
+});
+
+Route::get('/validate/nickname/{data}', function($data){
+    return User::where('nickname', '=', $data)->get();
+});
+
+Route::get('/validate/email/{data}', function($data){
+    return User::where('email', '=', $data)->get();
+});

@@ -10946,6 +10946,14 @@ li {
   color: #333 !important;
 }
 
+input:valid {
+  border-color: green;
+}
+
+input:invalid {
+  border-color: red;
+}
+
 :root {
   --color-primary: #FFFF00;
   --color-secondary: #424242;

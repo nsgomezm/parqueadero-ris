@@ -18,7 +18,8 @@
             <div class="form-row">
                 <div class="form-group col-12 col-md-6" >
                     <label for="cel">Celular</label>
-                    <input type="number" class="form-control" id="cel" v-model="personal_information.cel" required>
+                    <input type="number" class="form-control" id="cel" name="cel" v-model="personal_information.cel" v-validate="'numeric'" required>
+                    <span class="text-danger">{{ errors.first('cel') }}</span>
                 </div>
                 <div class="form-group col-12 col-md-6" >
                     <label for="address">Dirección</label>
@@ -27,7 +28,8 @@
             </div>
             <div class="form-group" >
                 <label for="comments">Comentarios</label>
-                <textarea id="comments" cols="30" rows="5" class="form-control" v-model="personal_information.comments"></textarea>
+                <textarea id="comments" cols="30" rows="5" class="form-control" v-model="personal_information.comments" name="comments" v-validate="'max:220'"></textarea>
+                <span class="text-danger">{{ errors.first('comments') }}</span>
             </div>
             <div class="form-row">
                 <div class="form-group col-12 col-md-6">
@@ -58,7 +60,6 @@
         methods:{
             async store(){
                 await axios.post(`/users/edit-information/personal-information/${this.personal_information.id}`, this.personal_information).then(res => {
-                    console.log(res.data)
                     swal("Registro actualizadó", "Información personal se actualizó correctamente", "success");
                 })
             }

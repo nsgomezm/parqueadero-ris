@@ -6,9 +6,6 @@
                     <img :src="photoUser" v-if="!showPhoto" class="w-100">
                     <img :src="photo" alt="" v-if="showPhoto" class="w-100">
                     <div class="input-group my-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text btn btn-success" id="inputGroupFileAddon01">Guardar</span>
-                        </div>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" v-on:change="previewFile">
                             <label class="custom-file-label" for="inputGroupFile01">Seleccionar foto</label>
@@ -33,21 +30,28 @@ export default {
     },
     methods:{
         async previewFile(event){
-            this.file = event.target.files[0]
-            this.photo = URL.createObjectURL(this.file);
-            this.showPhoto = true
+            try{
+                this.file = event.target.files[0]
+                this.photo = URL.createObjectURL(this.file);
+                this.showPhoto = true
 
-            this.changeFile()
+                this.changeFile()
+            }catch(error){
+                swal('No se seleccionó una foto')
+            }
 
         },
 
         async changeFile(){
             const form_data = new FormData()
             form_data.append('avatar', this.file, this.file.name)
-
-            await axios.post(`/users/edit-information/photo/${this.user.id}`, form_data).then(async (res) => {
-                swal('Foto actualizada con exito', 'para poder visualizar los cambios recargue la pagina.', 'success')
-            })
+            try{
+                await axios.post(`/users/edit-information/photo/${this.user.id}`, form_data).then(async (res) => {
+                    swal('Foto actualizada con exito', 'para poder visualizar los cambios recargue la pagina.', 'success')
+                })
+            }catch(error){
+                swal('Error', 'No se guardo correctamente. por favor intentelo nuevamente', 'error')
+            }
         }
     }
 }
