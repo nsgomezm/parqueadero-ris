@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     function index(){
-        $users = User::with('personal_information', 'roles')->get();
+        if(Auth::user()->hasRole('S.Admin')){
+            $users = User::with('personal_information', 'roles')->get();
+        }else if(Auth::user()->hasRole('Admin')){
+            $users = User::with('personal_information', 'roles')->get();
+        }
         return view('user/list', compact('users'));
     }
 

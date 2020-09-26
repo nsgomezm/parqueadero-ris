@@ -8,6 +8,7 @@ require('./bootstrap');
 
 import Vue from 'vue'
 import VeeValidate from 'vee-validate'
+import { Validator } from 'vee-validate';
 
 import datatables from 'datatables.net'
 import swal from 'sweetalert'
@@ -19,7 +20,6 @@ import FormPassword from './components/user/FormPassword'
 
 import ListParking from './components/parking/ListParking'
 import FormParking from './components/parking/Form'
-
 Vue.use(VeeValidate,{
     classes: true,
     validity: true,

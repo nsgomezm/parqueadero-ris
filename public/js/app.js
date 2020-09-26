@@ -2819,6 +2819,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2993,15 +2995,14 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
                 if (_this6.newUser == false) {
                   url += _this6.data.id;
-                } // No funciona para crear un usuario
-
+                }
 
                 _context6.prev = 2;
                 _context6.next = 5;
                 return axios.post(url, _this6.data).then(function (res) {
                   if (res.data.error != false) {
-                    // swal(res.data.title, res.data.menssage, "error")
-                    // }else{
+                    swal(res.data.title, res.data.menssage, "error");
+                  } else {
                     if (_this6.newUser == true) {
                       swal(res.data.title, res.data.menssage, "success").then(function (xx) {
                         window.location.href = "/users/edit-information/".concat(res.data.user.id);
@@ -3111,6 +3112,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['data'],
@@ -3132,7 +3135,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       $("#table-users").DataTable({
         "language": {
           "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-        }
+        },
+        responsive: "true"
       });
     },
     deleteUser: function deleteUser(user) {
@@ -88648,7 +88652,7 @@ var render = function() {
               type: "text",
               id: "nickname",
               name: "nickname",
-              disabled: _vm.data.nickname != "",
+              disabled: _vm.newUser == false,
               required: ""
             },
             domProps: { value: _vm.data.nickname },
@@ -88782,8 +88786,8 @@ var render = function() {
                   {
                     name: "validate",
                     rawName: "v-validate",
-                    value: "required",
-                    expression: "'required'"
+                    value: "required|min:6",
+                    expression: "'required|min:6'"
                   }
                 ],
                 ref: "password",
@@ -88804,7 +88808,11 @@ var render = function() {
                     _vm.$set(_vm.data, "password", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.errors.first("password")))
+              ])
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -88831,7 +88839,11 @@ var render = function() {
                   "data-vv-as": "password",
                   required: ""
                 }
-              })
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.errors.first("password_confirm")))
+              ])
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -89108,6 +89120,8 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(user.email))]),
                 _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(user.roles[0].name))]),
+                _vm._v(" "),
                 _c(
                   "td",
                   {
@@ -89216,6 +89230,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Usuario")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Correo")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Rol")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Estado")]),
         _vm._v(" "),
@@ -101448,6 +101464,7 @@ __webpack_require__.r(__webpack_exports__);
  * building robust, powerful web applications using Vue and Laravel.
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
 
 
 

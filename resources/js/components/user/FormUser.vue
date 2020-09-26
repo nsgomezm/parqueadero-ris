@@ -9,7 +9,7 @@
             </div>
             <div class="form-group">
                 <label for="nickname">Usuario</label>
-                <input type="text" class="form-control" id="nickname" v-model="data.nickname" name="nickname" v-validate="'required'" v-on:blur="nicknameValidate()" :disabled="data.nickname != ''" required>
+                <input type="text" class="form-control" id="nickname" v-model="data.nickname" name="nickname" v-validate="'required'" v-on:blur="nicknameValidate()" :disabled="newUser == false" required>
                 <span class="text-danger">{{ errors.first('nickname') }}</span>
             </div>
             <div class="form-group">
@@ -25,11 +25,13 @@
             </div>
             <div class="form-group" v-if="newUser == true">
                 <label for="passwordactual">Contraseña</label>
-                <input type="password" class="form-control" id="passwordactual" v-model="data.password" name="password" v-validate="'required'"  autocomplete="off" ref="password" required>
+                <input type="password" class="form-control" id="passwordactual" v-model="data.password" name="password" v-validate="'required|min:6'"  autocomplete="off" ref="password" required>
+                <span class="text-danger">{{ errors.first('password') }}</span>
             </div>
             <div class="form-group" v-if="newUser == true">
                 <label for="passwordconfirm">confirmar contraseña</label>
                 <input type="password" class="form-control" id="passwordconfirm" name="password_confirm" v-validate="'required|confirmed:password'" data-vv-as="password" required>
+                <span class="text-danger">{{ errors.first('password_confirm') }}</span>
             </div>
             <div class="form-group" v-if="newUser == false">
                 <div class="input-group mb-3">
@@ -151,13 +153,11 @@
             async store(){
                 var url = '/users/edit-information/user/'
                 if(this.newUser == false){ url += this.data.id }
-
-                // No funciona para crear un usuario
                 try{
                     await axios.post(url, this.data).then(res => {
                         if(res.data.error != false){
-                            // swal(res.data.title, res.data.menssage, "error")
-                        // }else{
+                            swal(res.data.title, res.data.menssage, "error")
+                        }else{
                             if(this.newUser == true){
                                 swal(res.data.title, res.data.menssage, "success")
                                 .then(xx => {

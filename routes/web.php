@@ -65,8 +65,10 @@ Route::prefix('/test')->group(function () {
     });
 
     Route::get('/', function(){
+        $role = Auth::user()->hasRole('S.Admin');
+
         // return Parking::with('user.personal_information')->get();
-        return User::with('Personal_information', 'roles', 'parking')->get();
+        return User::has('roles', 'S.Admin')->with('Personal_information', 'roles')->get();
 
 
         // return Personal_information::with('user')->get();

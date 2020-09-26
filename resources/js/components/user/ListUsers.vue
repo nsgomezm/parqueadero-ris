@@ -15,6 +15,7 @@
                         <th scope="col">Celular</th>
                         <th scope="col">Usuario</th>
                         <th scope="col">Correo</th>
+                        <th scope="col">Rol</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Editar</th>
                         <th scope="col">Eliminar</th>
@@ -28,6 +29,7 @@
                         <td>{{ user.personal_information.cel }}</td>
                         <td>{{ user.nickname }}</td>
                         <td>{{ user.email }}</td>
+                        <td>{{ user.roles[0].name }}</td>
                         <td :class="(user.status == 'activo') ? 'text-success' : 'text-danger'">{{ user.status }}</td>
                         <td><a :href="`/users/edit-information/${user.id}`" class="d-block text-center text-primary"><i class="fas fa-user-edit"></i></a></td>
                         <td><a href="#" class="d-block text-center text-danger" v-on:click="deleteUser(user)"><i class="fas fa-user-minus"></i></a></td>
@@ -81,10 +83,10 @@
         methods:{
             getTableUsers(){
                 $("#table-users").DataTable({
-
                     "language":{
                         "url" : "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-                    }
+                    },
+                    responsive: "true",
                 })
             },
             async deleteUser(user){
