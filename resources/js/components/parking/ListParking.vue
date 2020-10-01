@@ -1,11 +1,19 @@
 <template>
-    <div class="container">
+    <div class="px-4">
         <div class="navbar navbar-light mb-3">
             <button type="button" class="btn btn-success mb-2"  data-toggle="modal" data-target="#newParking">
                 Registrar
             </button>
         </div>
-        <div class="table-responsive">
+        <div v-if="!show">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Ris-Park</h4>
+                <p>Ris-Park te informa que no tienes parqueaderos registrados en el sistema</p>
+                <hr>
+                <p class="mb-0">Para ingresar un nuevo parquedero puede dar click en el boton "Registrar" o dar <a href="#" data-toggle="modal" data-target="#newParking">click aqui</a></p>
+            </div>
+        </div>
+        <div class="table-responsive" v-else>
             <table class="table table-hover w-100" id="table-parking">
                 <thead class="thead-dark">
                     <tr>
@@ -52,7 +60,7 @@
                     </div>
                     <div class="modal-body">
                         <form>
-                            <parking-form :data="false" @parkings="parkings = $event"></parking-form>
+                            <parking-form :data="false" @event="newParking = $event"></parking-form>
                         </form>
                     </div>
                 </div>
@@ -71,16 +79,19 @@
         },
         data(){
             return {
+                show: false,
                 parkings: this.data,
+                newParking: null,
             }
         },
         created() {
-            this.getTableParking()
-        },
-        watch:{
-            parking:function(event){
-                this.parkings = event
+            if(this.data.length != 0){
+                this.show = true
             }
+
+        },
+        mounted(){
+            this.getTableParking()
         },
         methods:{
             getTableParking(){
@@ -109,6 +120,9 @@
             async delete(parking){
                 await axios.post(`/Parking/edit-information/delete/${parking.id}`).then(res => {
                     this.parkings = res.data.parkings
+                    if(this.parkings.length == 0){
+                        this.show = false
+                    }
                     swal('',parking.name + " se eliminó con exito", 'success')
                 })
             }

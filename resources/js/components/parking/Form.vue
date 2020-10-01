@@ -4,30 +4,38 @@
             <h1 v-if="!newParking">Actualizar parqueadero</h1>
             <div class="form-group">
                 <label for="nit">Nit</label>
-                <input type="text" class="form-control" id="nit" v-model="parking.nit" required>
+                <input type="text" class="form-control" id="nit" v-model="parking.nit" name="nit" v-validate="'required|numeric'" v-on:blur="nitValidate()" required>
+                <span class="text-danger">{{ errors.first('nit') }}</span>
+
             </div>
             <div class="form-group">
                 <label for="name">Nombre</label>
-                <input type="text" class="form-control" id="name" v-model="parking.name" required>
+                <input type="text" class="form-control" id="name" name="name" v-model="parking.name" v-validate="'required'" required>
+                <span class="text-danger">{{ errors.first('name') }}</span>
             </div>
             <div class="form-group">
                 <label for="cel">Celular</label>
-                <input type="number" class="form-control" id="cel" v-model="parking.cel">
+                <input type="number" class="form-control" id="cel"  name="cel" v-model="parking.cel" v-validate="'numeric'">
+                <span class="text-danger">{{ errors.first('cel') }}</span>
+
             </div>
             <div class="form-group">
                 <label for="address">Dirección</label>
-                <input type="text" class="form-control" id="address" v-model="parking.address">
+                <input type="text" class="form-control" id="address" name="address" v-model="parking.address" v-validate="'required'">
+                <span class="text-danger">{{ errors.first('address') }}</span>
+
             </div>
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="status">Administrador</label>
                     </div>
-                    <select class="custom-select" id="status" v-model="parking.user_id">
-                        <option :value="user.id" v-for="(user, index) in users" :key="index">
-                            {{ user.personal_information.name }}
+                    <select class="custom-select" id="status" name="admin"  v-model="parking.user_id" v-validate="'required'" required>
+                        <option :value="user.id" v-for="(user, index) in users" :key="index" >
+                            {{ user.personal_information.name }} {{user.personal_information.last_name}}
                         </option>
                     </select>
+                    <span class="text-danger">{{ errors.first('admin') }}</span>
                 </div>
             </div>
             <div class="form-row">
@@ -71,16 +79,19 @@
         },
         methods:{
             async store(){
-                var url = '/Parking/edit-information/set/'
-                if(this.newParking == false){ url += this.parking.id }
+                try{
+                    var url = '/Parking/edit-information/set/'
+                    if(this.newParking == false){ url += this.parking.id }
 
-                // No funciona para crear un usuario
-                await axios.post(url, this.parking).then(res => {
-                    if(this.newParking == true){
-                        this.$emit('parkings', res.data.parkings)
-                    }
-                    swal(res.data.title, res.data.menssage, "success");
-                })
+                    await axios.post(url, this.parking).then(res => {
+                        swal(res.data.title, res.data.menssage, "success")
+                        .then(result => {
+                            window.location.href = `/Parking/edit-information/${res.data.parking.id}`
+                        })
+                    })
+                }catch(res){
+                    swal('No se puedo guardar la información, por favor intenlo nuevamente.')
+                }
             },
             async getParking(){
                 if(this.data){
@@ -93,7 +104,18 @@
                     this.users =  res.data.users
                     console.log(res.data)
                 })
-            }
+            },
+            async nitValidate(){
+                if(this.parking.nit != '') {
+                    await axios.get(`/api/validate/nit/${this.parking.nit}`).then(res => {
+                        if(!$.isEmptyObject(res.data)){
+                            document.getElementById("nit").focus();
+                            this.parking.nit = '';
+                            swal('Nit already been taken');
+                        }
+                    })
+                }
+            },
         },
     }
 </script>

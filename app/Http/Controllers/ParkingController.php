@@ -34,7 +34,7 @@ class ParkingController extends Controller
         return response()->json([
             'title' => 'Creación exitosa',
             'menssage' => 'Se creo el nuevo parqueadero',
-            'parkings' => Parking::with('user.personal_information')->get()
+            'parking' => $parking
         ]);
     }
 

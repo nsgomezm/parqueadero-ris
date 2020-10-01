@@ -1978,6 +1978,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['data'],
   data: function data() {
@@ -2008,28 +2016,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _context.prev = 0;
                 url = '/Parking/edit-information/set/';
 
                 if (_this.newParking == false) {
                   url += _this.parking.id;
-                } // No funciona para crear un usuario
+                }
 
-
-                _context.next = 4;
+                _context.next = 5;
                 return axios.post(url, _this.parking).then(function (res) {
-                  if (_this.newParking == true) {
-                    _this.$emit('parkings', res.data.parkings);
-                  }
-
-                  swal(res.data.title, res.data.menssage, "success");
+                  swal(res.data.title, res.data.menssage, "success").then(function (result) {
+                    window.location.href = "/Parking/edit-information/".concat(res.data.parking.id);
+                  });
                 });
 
-              case 4:
+              case 5:
+                _context.next = 10;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                swal('No se puedo guardar la información, por favor intenlo nuevamente.');
+
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 7]]);
       }))();
     },
     getParking: function getParking() {
@@ -2072,6 +2087,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee3);
+      }))();
+    },
+    nitValidate: function nitValidate() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                if (!(_this4.parking.nit != '')) {
+                  _context4.next = 3;
+                  break;
+                }
+
+                _context4.next = 3;
+                return axios.get("/api/validate/nit/".concat(_this4.parking.nit)).then(function (res) {
+                  if (!$.isEmptyObject(res.data)) {
+                    document.getElementById("nit").focus();
+                    _this4.parking.nit = '';
+                    swal('Nit already been taken');
+                  }
+                });
+
+              case 3:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     }
   }
@@ -2160,6 +2205,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['data'],
@@ -2168,16 +2221,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      parkings: this.data
+      show: false,
+      parkings: this.data,
+      newParking: null
     };
   },
   created: function created() {
-    this.getTableParking();
-  },
-  watch: {
-    parking: function parking(event) {
-      this.parkings = event;
+    if (this.data.length != 0) {
+      this.show = true;
     }
+  },
+  mounted: function mounted() {
+    this.getTableParking();
   },
   methods: {
     getTableParking: function getTableParking() {
@@ -2226,6 +2281,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context2.next = 2;
                 return axios.post("/Parking/edit-information/delete/".concat(parking.id)).then(function (res) {
                   _this2.parkings = res.data.parkings;
+
+                  if (_this2.parkings.length == 0) {
+                    _this2.show = false;
+                  }
+
                   swal('', parking.name + " se eliminó con exito", 'success');
                 });
 
@@ -2309,6 +2369,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['data'],
   data: function data() {
@@ -2339,28 +2407,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _context.prev = 0;
                 url = '/Parking/edit-information/set/';
 
                 if (_this.newParking == false) {
                   url += _this.parking.id;
-                } // No funciona para crear un usuario
+                }
 
-
-                _context.next = 4;
+                _context.next = 5;
                 return axios.post(url, _this.parking).then(function (res) {
-                  if (_this.newParking == true) {
-                    _this.$emit('parkings', res.data.parkings);
-                  }
-
-                  swal(res.data.title, res.data.menssage, "success");
+                  swal(res.data.title, res.data.menssage, "success").then(function (result) {
+                    window.location.href = "/Parking/edit-information/".concat(res.data.parking.id);
+                  });
                 });
 
-              case 4:
+              case 5:
+                _context.next = 10;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                swal('No se puedo guardar la información, por favor intenlo nuevamente.');
+
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 7]]);
       }))();
     },
     getParking: function getParking() {
@@ -2403,6 +2478,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee3);
+      }))();
+    },
+    nitValidate: function nitValidate() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                if (!(_this4.parking.nit != '')) {
+                  _context4.next = 3;
+                  break;
+                }
+
+                _context4.next = 3;
+                return axios.get("/api/validate/nit/".concat(_this4.parking.nit)).then(function (res) {
+                  if (!$.isEmptyObject(res.data)) {
+                    document.getElementById("nit").focus();
+                    _this4.parking.nit = '';
+                    swal('Nit already been taken');
+                  }
+                });
+
+              case 3:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     }
   }
@@ -87226,12 +87331,21 @@ var render = function() {
                 rawName: "v-model",
                 value: _vm.parking.nit,
                 expression: "parking.nit"
+              },
+              {
+                name: "validate",
+                rawName: "v-validate",
+                value: "required|numeric",
+                expression: "'required|numeric'"
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text", id: "nit", required: "" },
+            attrs: { type: "text", id: "nit", name: "nit", required: "" },
             domProps: { value: _vm.parking.nit },
             on: {
+              blur: function($event) {
+                return _vm.nitValidate()
+              },
               input: function($event) {
                 if ($event.target.composing) {
                   return
@@ -87239,7 +87353,11 @@ var render = function() {
                 _vm.$set(_vm.parking, "nit", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-danger" }, [
+            _vm._v(_vm._s(_vm.errors.first("nit")))
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
@@ -87252,10 +87370,16 @@ var render = function() {
                 rawName: "v-model",
                 value: _vm.parking.name,
                 expression: "parking.name"
+              },
+              {
+                name: "validate",
+                rawName: "v-validate",
+                value: "required",
+                expression: "'required'"
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text", id: "name", required: "" },
+            attrs: { type: "text", id: "name", name: "name", required: "" },
             domProps: { value: _vm.parking.name },
             on: {
               input: function($event) {
@@ -87265,7 +87389,11 @@ var render = function() {
                 _vm.$set(_vm.parking, "name", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-danger" }, [
+            _vm._v(_vm._s(_vm.errors.first("name")))
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
@@ -87278,10 +87406,16 @@ var render = function() {
                 rawName: "v-model",
                 value: _vm.parking.cel,
                 expression: "parking.cel"
+              },
+              {
+                name: "validate",
+                rawName: "v-validate",
+                value: "numeric",
+                expression: "'numeric'"
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "number", id: "cel" },
+            attrs: { type: "number", id: "cel", name: "cel" },
             domProps: { value: _vm.parking.cel },
             on: {
               input: function($event) {
@@ -87291,7 +87425,11 @@ var render = function() {
                 _vm.$set(_vm.parking, "cel", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-danger" }, [
+            _vm._v(_vm._s(_vm.errors.first("cel")))
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
@@ -87304,10 +87442,16 @@ var render = function() {
                 rawName: "v-model",
                 value: _vm.parking.address,
                 expression: "parking.address"
+              },
+              {
+                name: "validate",
+                rawName: "v-validate",
+                value: "required",
+                expression: "'required'"
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text", id: "address" },
+            attrs: { type: "text", id: "address", name: "address" },
             domProps: { value: _vm.parking.address },
             on: {
               input: function($event) {
@@ -87317,7 +87461,11 @@ var render = function() {
                 _vm.$set(_vm.parking, "address", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-danger" }, [
+            _vm._v(_vm._s(_vm.errors.first("address")))
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
@@ -87333,10 +87481,16 @@ var render = function() {
                     rawName: "v-model",
                     value: _vm.parking.user_id,
                     expression: "parking.user_id"
+                  },
+                  {
+                    name: "validate",
+                    rawName: "v-validate",
+                    value: "required",
+                    expression: "'required'"
                   }
                 ],
                 staticClass: "custom-select",
-                attrs: { id: "status" },
+                attrs: { id: "status", name: "admin", required: "" },
                 on: {
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -87363,13 +87517,19 @@ var render = function() {
                     _vm._v(
                       "\n                        " +
                         _vm._s(user.personal_information.name) +
+                        " " +
+                        _vm._s(user.personal_information.last_name) +
                         "\n                    "
                     )
                   ]
                 )
               }),
               0
-            )
+            ),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-danger" }, [
+              _vm._v(_vm._s(_vm.errors.first("admin")))
+            ])
           ])
         ]),
         _vm._v(" "),
@@ -87496,96 +87656,101 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
+  return _c("div", { staticClass: "px-4" }, [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "table-responsive" }, [
-      _c(
-        "table",
-        {
-          staticClass: "table table-hover w-100",
-          attrs: { id: "table-parking" }
-        },
-        [
-          _vm._m(1),
-          _vm._v(" "),
+    !_vm.show
+      ? _c("div", [_vm._m(1)])
+      : _c("div", { staticClass: "table-responsive" }, [
           _c(
-            "tbody",
-            _vm._l(_vm.parkings, function(parking, index) {
-              return _c("tr", { key: index }, [
-                _c("th", [_vm._v(_vm._s(index + 1))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(parking.nit))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(parking.name))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(parking.cel))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(parking.address))]),
-                _vm._v(" "),
-                _c("td", [
-                  parking.user != null
-                    ? _c("p", [
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href:
-                                "/users/edit-information/" +
-                                parking.user.personal_information.id,
-                              target: "_blank"
-                            }
-                          },
-                          [
-                            _vm._v(
-                              _vm._s(parking.user.personal_information.name) +
-                                " "
+            "table",
+            {
+              staticClass: "table table-hover w-100",
+              attrs: { id: "table-parking" }
+            },
+            [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.parkings, function(parking, index) {
+                  return _c("tr", { key: index }, [
+                    _c("th", [_vm._v(_vm._s(index + 1))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(parking.nit))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(parking.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(parking.cel))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(parking.address))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      parking.user != null
+                        ? _c("p", [
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href:
+                                    "/users/edit-information/" +
+                                    parking.user.personal_information.id,
+                                  target: "_blank"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    parking.user.personal_information.name
+                                  ) + " "
+                                )
+                              ]
                             )
-                          ]
-                        )
-                      ])
-                    : _c("p", [
-                        _vm._v(
-                          "\n                            Sin administrador\n                        "
-                        )
-                      ])
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(parking.created_at))]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "d-block text-center text-primary",
-                      attrs: { href: "/Parking/edit-information/" + parking.id }
-                    },
-                    [_c("i", { staticClass: "fas fa-user-edit" })]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "d-block text-center text-danger",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function($event) {
-                          return _vm.deleteParking(parking)
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "fas fa-user-minus" })]
-                  )
-                ])
-              ])
-            }),
-            0
+                          ])
+                        : _c("p", [
+                            _vm._v(
+                              "\n                            Sin administrador\n                        "
+                            )
+                          ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(parking.created_at))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block text-center text-primary",
+                          attrs: {
+                            href: "/Parking/edit-information/" + parking.id
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-user-edit" })]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block text-center text-danger",
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteParking(parking)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fas fa-user-minus" })]
+                      )
+                    ])
+                  ])
+                }),
+                0
+              )
+            ]
           )
-        ]
-      )
-    ]),
+        ]),
     _vm._v(" "),
     _c(
       "div",
@@ -87604,7 +87769,7 @@ var render = function() {
       [
         _c("div", { staticClass: "modal-dialog modal-dialog-centered" }, [
           _c("div", { staticClass: "modal-content" }, [
-            _vm._m(2),
+            _vm._m(3),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _c(
@@ -87613,8 +87778,8 @@ var render = function() {
                   _c("parking-form", {
                     attrs: { data: false },
                     on: {
-                      parkings: function($event) {
-                        _vm.parkings = $event
+                      event: function($event) {
+                        _vm.newParking = $event
                       }
                     }
                   })
@@ -87647,6 +87812,43 @@ var staticRenderFns = [
         [_vm._v("\n            Registrar\n        ")]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "alert alert-info", attrs: { role: "alert" } },
+      [
+        _c("h4", { staticClass: "alert-heading" }, [_vm._v("Ris-Park")]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v(
+            "Ris-Park te informa que no tienes parqueaderos registrados en el sistema"
+          )
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("p", { staticClass: "mb-0" }, [
+          _vm._v(
+            'Para ingresar un nuevo parquedero puede dar click en el boton "Registrar" o dar '
+          ),
+          _c(
+            "a",
+            {
+              attrs: {
+                href: "#",
+                "data-toggle": "modal",
+                "data-target": "#newParking"
+              }
+            },
+            [_vm._v("click aqui")]
+          )
+        ])
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -87748,12 +87950,21 @@ var render = function() {
                 rawName: "v-model",
                 value: _vm.parking.nit,
                 expression: "parking.nit"
+              },
+              {
+                name: "validate",
+                rawName: "v-validate",
+                value: "required|numeric",
+                expression: "'required|numeric'"
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text", id: "nit", required: "" },
+            attrs: { type: "text", id: "nit", name: "nit", required: "" },
             domProps: { value: _vm.parking.nit },
             on: {
+              blur: function($event) {
+                return _vm.nitValidate()
+              },
               input: function($event) {
                 if ($event.target.composing) {
                   return
@@ -87761,7 +87972,11 @@ var render = function() {
                 _vm.$set(_vm.parking, "nit", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-danger" }, [
+            _vm._v(_vm._s(_vm.errors.first("nit")))
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
@@ -87774,10 +87989,16 @@ var render = function() {
                 rawName: "v-model",
                 value: _vm.parking.name,
                 expression: "parking.name"
+              },
+              {
+                name: "validate",
+                rawName: "v-validate",
+                value: "required",
+                expression: "'required'"
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text", id: "name", required: "" },
+            attrs: { type: "text", id: "name", name: "name", required: "" },
             domProps: { value: _vm.parking.name },
             on: {
               input: function($event) {
@@ -87787,7 +88008,11 @@ var render = function() {
                 _vm.$set(_vm.parking, "name", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-danger" }, [
+            _vm._v(_vm._s(_vm.errors.first("name")))
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
@@ -87800,10 +88025,16 @@ var render = function() {
                 rawName: "v-model",
                 value: _vm.parking.cel,
                 expression: "parking.cel"
+              },
+              {
+                name: "validate",
+                rawName: "v-validate",
+                value: "numeric",
+                expression: "'numeric'"
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "number", id: "cel" },
+            attrs: { type: "number", id: "cel", name: "cel" },
             domProps: { value: _vm.parking.cel },
             on: {
               input: function($event) {
@@ -87813,7 +88044,11 @@ var render = function() {
                 _vm.$set(_vm.parking, "cel", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-danger" }, [
+            _vm._v(_vm._s(_vm.errors.first("cel")))
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
@@ -87826,10 +88061,16 @@ var render = function() {
                 rawName: "v-model",
                 value: _vm.parking.address,
                 expression: "parking.address"
+              },
+              {
+                name: "validate",
+                rawName: "v-validate",
+                value: "required",
+                expression: "'required'"
               }
             ],
             staticClass: "form-control",
-            attrs: { type: "text", id: "address" },
+            attrs: { type: "text", id: "address", name: "address" },
             domProps: { value: _vm.parking.address },
             on: {
               input: function($event) {
@@ -87839,7 +88080,11 @@ var render = function() {
                 _vm.$set(_vm.parking, "address", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-danger" }, [
+            _vm._v(_vm._s(_vm.errors.first("address")))
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
@@ -87855,10 +88100,16 @@ var render = function() {
                     rawName: "v-model",
                     value: _vm.parking.user_id,
                     expression: "parking.user_id"
+                  },
+                  {
+                    name: "validate",
+                    rawName: "v-validate",
+                    value: "required",
+                    expression: "'required'"
                   }
                 ],
                 staticClass: "custom-select",
-                attrs: { id: "status" },
+                attrs: { id: "status", name: "admin", required: "" },
                 on: {
                   change: function($event) {
                     var $$selectedVal = Array.prototype.filter
@@ -87885,13 +88136,19 @@ var render = function() {
                     _vm._v(
                       "\n                        " +
                         _vm._s(user.personal_information.name) +
+                        " " +
+                        _vm._s(user.personal_information.last_name) +
                         "\n                    "
                     )
                   ]
                 )
               }),
               0
-            )
+            ),
+            _vm._v(" "),
+            _c("span", { staticClass: "text-danger" }, [
+              _vm._v(_vm._s(_vm.errors.first("admin")))
+            ])
           ])
         ]),
         _vm._v(" "),
