@@ -20,6 +20,9 @@ import FormPassword from './components/user/FormPassword'
 
 import ListParking from './components/parking/ListParking'
 import FormParking from './components/parking/Form'
+
+import ListCustomers from './components/monthly/ListCustomers'
+import FormCustomer from './components/monthly/FormCustomer'
 Vue.use(VeeValidate,{
     classes: true,
     validity: true,
@@ -40,5 +43,8 @@ const app = new Vue({
 
         'parking-list': ListParking,
         'parking-form': FormParking,
+
+        ListCustomers,
+        FormCustomer,
     }
 });

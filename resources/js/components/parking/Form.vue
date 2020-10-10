@@ -4,7 +4,7 @@
             <h1 v-if="!newParking">Actualizar parqueadero</h1>
             <div class="form-group">
                 <label for="nit">Nit</label>
-                <input type="text" class="form-control" id="nit" v-model="parking.nit" name="nit" v-validate="'required|numeric'" v-on:blur="nitValidate()" required>
+                <input type="text" class="form-control" id="nit" v-model="parking.nit" name="nit" v-validate="'required|numeric'" v-on:blur="nitValidate()" :disabled="newParking == false" required>
                 <span class="text-danger">{{ errors.first('nit') }}</span>
 
             </div>

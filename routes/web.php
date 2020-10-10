@@ -102,8 +102,14 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::post('/edit-information/set/{parking?}', 'ParkingController@setParking');
         Route::post('/edit-information/delete/{parking}', 'ParkingController@deleteParking');
+    });
 
+    Route::prefix('/Customer')->group(function(){
+        Route::get('/', 'CustomerController@index')->name('customer.list');
+        Route::get('/edit-information/{customer}', 'CustomerController@form');
 
+        Route::post('/edit-information/set/{customer?}', 'CustomerController@setCustomer');
+        Route::post('/edit-information/delete/{customer}', 'CustomerController@deleteCustomer');
     });
 
 

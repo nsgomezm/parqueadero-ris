@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Customer;
 use App\Models\Parking;
 use App\Models\Personal_information;
 use App\Models\User;
@@ -23,6 +24,12 @@ Route::get('/admins/get', function(){
     ]);
 });
 
+Route::get('/parking/get', function(){
+    return response()->json([
+        'parkings' => Parking::get()
+    ]);
+});
+
 Route::group(['prefix' => '/validate'], function () {
     Route::get('/cedula/{number}', function($number){
         return Personal_information::with('user')->where('cedula', '=', $number)->get();
@@ -38,6 +45,10 @@ Route::group(['prefix' => '/validate'], function () {
 
     Route::get('/nit/{data}', function($data){
         return Parking::where('nit', '=', $data)->get();
+    });
+
+    Route::get('/cedul/{number}', function($number){
+        return Customer::where('cedula', '=', $number)->get();
     });
 });
 

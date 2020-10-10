@@ -39,72 +39,71 @@
             <div class="sidebar__inner menujq">
                 <ul>
                     <li>
-                    <a href="/home" class="icon">
-                        <span class="icon"><i class="fas fa-home"></i></span>
-                        <span class="title">Inicio</span>
-                    </a>
+                        <a href="/home" class="icon">
+                            <span class="icon"><i class="fas fa-home"></i></span>
+                            <span class="title">Inicio</span>
+                        </a>
                     </li>
 
                     <li>
-                    <a href="/users/list" class="icon">
-                        <span class="icon"><i class="fas fa-users"></i></span>
-                        <span class="title">Usuarios</span>
-                    </a>
+                        <a href="/users/list" class="icon">
+                            <span class="icon"><i class="fas fa-users"></i></span>
+                            <span class="title">Usuarios</span>
+                        </a>
                     </li>
                     <li>
-                    <a href="/Parking/list" class="icon">
-                        <span class="icon"><i class="fas fa-parking"></i></span>
-                        <span class="title">PARQUEADERO</span>
-                    </a>
+                        <a href="/Parking/list" class="icon">
+                            <span class="icon"><i class="fas fa-parking"></i></span>
+                            <span class="title">PARQUEADERO</span>
+                        </a>
                     </li>
+                    {{-- <li> --}}
+                        {{-- <a href="javascript:void()" class="icon"> --}}
+                            {{-- <span class="icon"><i class="fas fa-calendar-alt"></i></span> --}}
+                            {{-- <span class="title">Mensualidades</span> --}}
+                        {{-- </a> --}}
+                        {{-- <ul> --}}
+                            <li>
+                                <a href="/Customer" class="icon">
+                                    <span class="icon"><i class="fas fa-address-card"></i></span>
+                                    <span class="title">Clientes</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="icon">
+                                    <span class="icon"><i class="fas fa-car-side"></i></span>
+                                    <span class="title">Vehiculos</span>
+                                </a>
+                            </li>
+                        {{-- </ul> --}}
+                    {{-- </li> --}}
 
-                    <li>
-                    <a href="javascript:void();" class="icon">
-                        <span class="icon"><i class="fab fa-delicious"></i></span>
-                        <span class="title">Opciones 1</span>
-                    </a>
-                    <ul>
-                        <li>
-                        <a href="#" class="icon">
+                    {{-- <li>
+                        <a href="javascript:void();" class="icon">
                             <span class="icon"><i class="fab fa-delicious"></i></span>
-                            <span class="title">Opcion 1</span>
+                            <span class="title">Opciones 2</span>
                         </a>
-                        </li>
-                        <li>
-                        <a href="#" class="icon">
-                            <span class="icon"><i class="fab fa-delicious"></i></span>
-                            <span class="title">Opcion 2</span>
-                        </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript:void();" class="icon">
-                        <span class="icon"><i class="fab fa-delicious"></i></span>
-                        <span class="title">Opciones 2</span>
-                    </a>
-                    <ul>
-                        <li>
-                        <a href="#" class="icon">
-                            <span class="icon"><i class="fab fa-delicious"></i></span>
-                            <span class="title">Opcion 1</span>
-                        </a>
-                        </li>
-                        <li>
-                        <a href="#" class="icon">
-                            <span class="icon"><i class="fab fa-delicious"></i></span>
-                            <span class="title">Opcion 2</span>
-                        </a>
-                        </li>
-                        <li>
-                        <a href="#" class="icon">
-                            <span class="icon"><i class="fab fa-delicious"></i></span>
-                            <span class="title">Opcion 3</span>
-                        </a>
-                        </li>
-                    </ul>
-                    </li>
+                        <ul>
+                            <li>
+                            <a href="#" class="icon">
+                                <span class="icon"><i class="fab fa-delicious"></i></span>
+                                <span class="title">Opcion 1</span>
+                            </a>
+                            </li>
+                            <li>
+                            <a href="#" class="icon">
+                                <span class="icon"><i class="fab fa-delicious"></i></span>
+                                <span class="title">Opcion 2</span>
+                            </a>
+                            </li>
+                            <li>
+                            <a href="#" class="icon">
+                                <span class="icon"><i class="fab fa-delicious"></i></span>
+                                <span class="title">Opcion 3</span>
+                            </a>
+                            </li>
+                        </ul>
+                    </li>--}}
                 </ul>
             </div>
         </div>

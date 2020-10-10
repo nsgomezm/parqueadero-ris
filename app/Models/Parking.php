@@ -14,6 +14,11 @@ class Parking extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function customer()
+    {
+        return $this->hasMany(Customer::class);
+    }
+
     protected $fillable = [
         'nit','name', 'cel', 'address', 'user_id',
     ];
